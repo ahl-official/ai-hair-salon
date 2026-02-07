@@ -1,0 +1,10 @@
+{
+  "buildCommand": null,
+  "outputDirectory": "app",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}

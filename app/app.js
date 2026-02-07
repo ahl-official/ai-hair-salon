@@ -1,9 +1,8 @@
 // Configuration
 const CONFIG = {
-    API_KEY: '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',
-    API_URL: 'https://openrouter.ai/api/v1/chat/completions',
-    IMAGE_MODEL: 'google/gemini-3-pro-image-preview', // Nano Banana Pro - Gemini 3 Pro Image (Verified working)
-    ANALYSIS_MODEL: 'google/gemini-2.0-flash-001', // Using Flash 2.0 for detailed text analysis
+    // API endpoints now point to serverless functions (API key is secure on server)
+    ANALYZE_URL: '/api/analyze',
+    GENERATE_URL: '/api/generate',
     MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
     ALLOWED_TYPES: ['image/jpeg', 'image/png', 'image/webp']
 };
@@ -332,23 +331,14 @@ async function handleTransform() {
 async function performAnalysis() {
     console.log('📝 Analyzing face and hair features...');
     try {
-        const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(CONFIG.ANALYZE_URL, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${CONFIG.API_KEY}`,
-                'Content-Type': 'application/json',
-                'HTTP-Referer': window.location.origin,
-                'X-Title': 'AI Hair Salon'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: CONFIG.ANALYSIS_MODEL,
-                messages: [{
-                    role: 'user',
-                    content: [
-                        { type: 'text', text: ANALYSIS_PROMPT },
-                        { type: 'image_url', image_url: { url: state.uploadedImageBase64 } }
-                    ]
-                }]
+                imageBase64: state.uploadedImageBase64,
+                prompt: ANALYSIS_PROMPT
             })
         });
 
@@ -368,23 +358,14 @@ async function performAnalysis() {
 async function performImageGeneration() {
     console.log('🎨 Generating hairstyle images...');
     try {
-        const response = await fetch(CONFIG.API_URL, {
+        const response = await fetch(CONFIG.GENERATE_URL, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${CONFIG.API_KEY}`,
-                'Content-Type': 'application/json',
-                'HTTP-Referer': window.location.origin,
-                'X-Title': 'AI Hair Salon'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: CONFIG.IMAGE_MODEL,
-                messages: [{
-                    role: 'user',
-                    content: [
-                        { type: 'text', text: IMAGE_GENERATION_PROMPT },
-                        { type: 'image_url', image_url: { url: state.uploadedImageBase64 } }
-                    ]
-                }]
+                imageBase64: state.uploadedImageBase64,
+                prompt: IMAGE_GENERATION_PROMPT
             })
         });
 
