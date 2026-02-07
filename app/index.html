@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hair Salon | Find Your Perfect Hairstyle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="50" height="50" rx="12" fill="url(#gradient1)" />
+                    <!-- Scissors icon for salon -->
+                    <path d="M15 20 L20 25 L15 30 M35 20 L30 25 L35 30 M20 25 L30 25" stroke="white" stroke-width="2.5"
+                        stroke-linecap="round" />
+                    <circle cx="15" cy="20" r="3" fill="white" />
+                    <circle cx="15" cy="30" r="3" fill="white" />
+                    <defs>
+                        <linearGradient id="gradient1" x1="0" y1="0" x2="50" y2="50">
+                            <stop offset="0%" stop-color="#3B82F6" />
+                            <stop offset="100%" stop-color="#1E40AF" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>AI Hair Salon</h1>
+            </div>
+            <p class="subtitle">Discover your perfect hairstyle with AI</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-card">
+                    <div class="upload-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h2>Upload Your Photo</h2>
+                    <p>Let our AI find the perfect hairstyle for you</p>
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <div class="input-buttons">
+                        <button class="upload-btn" id="uploadBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Upload Photo
+                        </button>
+                        <button class="camera-btn" id="cameraBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                </path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            Camera
+                        </button>
+                    </div>
+                    <span class="file-info">Supports: JPG, PNG, WebP (Max 5MB)</span>
+                </div>
+            </section>
+
+            <!-- Camera Section -->
+            <section class="camera-section hidden" id="cameraSection">
+                <div class="camera-card">
+                    <h2>Take a Selfie</h2>
+                    <div class="video-container">
+                        <video id="cameraVideo" autoplay playsinline muted></video>
+                        <canvas id="cameraCanvas" hidden></canvas>
+                    </div>
+                    <div class="camera-controls">
+                        <button class="capture-btn" id="captureBtn">
+                            <div class="capture-inner"></div>
+                        </button>
+                        <button class="cancel-btn" id="closeCameraBtn">Cancel</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview & Transform Section -->
+            <section class="preview-section hidden" id="previewSection">
+                <div class="preview-card">
+                    <h2>Your Photo</h2>
+                    <div class="image-container">
+                        <img id="previewImage" alt="Preview">
+                    </div>
+
+                    <button class="transform-btn" id="transformBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                        </svg>
+                        Generate Best Hairstyle
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sci-Fi Analysis Section -->
+            <section class="loading-section hidden" id="loadingSection">
+                <div class="scanner-container">
+                    <div class="scan-overlay">
+                        <div class="scan-grid"></div>
+                        <div class="scan-line"></div>
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+                    </div>
+                    <div class="scanner-content">
+                        <img id="scanningImage" src="" alt="Scanning Consumer" class="scan-image">
+                    </div>
+                </div>
+
+                <div class="analysis-data">
+                    <div class="data-header">
+                        <span class="blink">●</span> LIVE ANALYSIS
+                    </div>
+                    <div class="data-log" id="dataLog">
+                        INITIALIZING NEURAL LINK...
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="results-header">
+                    <h2>Your Perfect Hairstyle!</h2>
+                    <button class="new-transform-btn" id="newTransformBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Try Another Style
+                    </button>
+                </div>
+
+                <div class="comparison-container">
+                    <div class="comparison-image">
+                        <h3>Current Look</h3>
+                        <div class="image-wrapper">
+                            <img id="beforeImage" alt="Before">
+                        </div>
+                    </div>
+
+                    <div class="comparison-divider">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+
+                    <div class="comparison-image">
+                        <h3>Recommended Style</h3>
+                        <div class="image-wrapper">
+                            <img id="afterImage" alt="After">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Analysis Report -->
+                <div class="analysis-report" id="analysisReport">
+                    <h3>📋 AI Hair Stylist Analysis</h3>
+                    <div class="analysis-content" id="analysisContent">
+                        <p class="loading-analysis">Generating analysis...</p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="download-btn" id="downloadImageBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Image
+                    </button>
+                    <button class="download-report-btn" id="downloadReportBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Download Full Report
+                    </button>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section hidden" id="errorSection">
+                <div class="error-card">
+                    <div class="error-icon">⚠️</div>
+                    <h2>Something went wrong</h2>
+                    <p id="errorMessage">Unable to generate hairstyle. Please try again.</p>
+                    <button class="retry-btn" id="retryBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Try Again
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by <strong>AI Technology</strong></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
