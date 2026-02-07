@@ -70,6 +70,7 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    width: 100%;
 }
 
 /* Header */
@@ -308,9 +309,9 @@ body::before {
 .image-wrapper {
     width: 100%;
     min-height: 300px;
-    max-height: none;
+    max-height: 600px;
     border-radius: 16px;
-    overflow: visible;
+    overflow: hidden;
     margin: 1.5rem 0;
     background: rgba(0, 0, 0, 0.3);
     display: flex;
@@ -638,6 +639,7 @@ body::before {
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
+        overflow-x: hidden;
     }
 
     .logo h1 {
@@ -652,7 +654,20 @@ body::before {
     .preview-card,
     .loading-card,
     .error-card {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+
+    .image-container,
+    .image-wrapper {
+        max-height: 500px;
+        margin: 1rem 0;
+        padding: 0.5rem;
+    }
+
+    .image-container img,
+    .image-wrapper img {
+        max-height: 480px;
     }
 
     .comparison-container {
@@ -684,21 +699,86 @@ body::before {
     .new-transform-btn {
         width: 100%;
     }
+
+    .scanner-container {
+        max-width: 100%;
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    .analysis-data {
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .data-log {
+        font-size: 0.8rem;
+        height: 80px;
+    }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0.75rem;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+    }
+
     .logo h1 {
         font-size: 1.5rem;
     }
 
+    .logo svg {
+        width: 32px;
+        height: 32px;
+    }
+
     .upload-card h2,
     .preview-card h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .upload-card,
+    .preview-card,
+    .loading-card,
+    .error-card {
+        padding: 1.25rem 0.75rem;
     }
 
     .image-container,
     .image-wrapper {
-        max-height: 300px;
+        max-height: 400px;
+        min-height: 200px;
+        margin: 0.75rem 0;
+        padding: 0.25rem;
+    }
+
+    .image-container img,
+    .image-wrapper img {
+        max-height: 380px;
+        width: auto;
+        max-width: 100%;
+    }
+
+    .scanner-container {
+        max-width: 100%;
+        width: 95%;
+        max-height: 400px;
+    }
+
+    .analysis-report {
+        padding: 1rem;
+    }
+
+    .upload-btn,
+    .transform-btn,
+    .download-btn,
+    .retry-btn,
+    .new-transform-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
 
