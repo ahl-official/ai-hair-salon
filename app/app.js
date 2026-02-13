@@ -229,16 +229,19 @@ function handleFile(file) {
     // Read and display image
     const reader = new FileReader();
 
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
         state.uploadedImage = file;
-        state.uploadedImageBase64 = e.target.result;
+
+        // Compress image before saving to state
+        const compressedBase64 = await compressImage(e.target.result);
+        state.uploadedImageBase64 = compressedBase64;
 
         // Show preview
-        elements.previewImage.src = e.target.result;
+        elements.previewImage.src = compressedBase64;
         hideSection(elements.uploadSection);
         showSection(elements.previewSection);
 
-        console.log('✅ Photo uploaded successfully');
+        console.log('✅ Photo uploaded and compressed successfully');
     };
 
     reader.onerror = () => {
@@ -246,6 +249,41 @@ function handleFile(file) {
     };
 
     reader.readAsDataURL(file);
+}
+
+// Compress Image Helper
+async function compressImage(base64Str, maxWidth = 1200, quality = 0.7) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = base64Str;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxWidth) {
+                    width *= maxWidth / height;
+                    height = maxWidth;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Compress
+            const compressed = canvas.toDataURL('image/jpeg', quality);
+            console.log(`📉 Compressed image: ${Math.round(base64Str.length / 1024)}KB -> ${Math.round(compressed.length / 1024)}KB`);
+            resolve(compressed);
+        };
+    });
 }
 
 // ==========================================
@@ -310,16 +348,22 @@ function capturePhoto() {
     // Stop camera
     stopCamera();
 
-    // Set state
-    state.uploadedImageBase64 = dataUrl;
-    state.uploadedImage = null; // No file object for camera capture
+    // Set state (Capture is already small enough usually, but good to ensure format)
+    // Canvas toDataURL IS already compressing if we use jpeg/0.95, but let's be consistent
+    // if the camera output is 1920x1080, it might still remain large.
+    // Let's use the same compression helper but dataUrl is already generated.
 
-    // Show preview
-    elements.previewImage.src = dataUrl;
-    hideSection(elements.uploadSection);
-    showSection(elements.previewSection);
+    compressImage(dataUrl).then(compressed => {
+        state.uploadedImageBase64 = compressed;
+        state.uploadedImage = null;
 
-    console.log('📸 Photo captured successfully');
+        // Show preview
+        elements.previewImage.src = compressed;
+        hideSection(elements.uploadSection);
+        showSection(elements.previewSection);
+
+        console.log('📸 Photo captured and processed');
+    });
 }
 
 // Transform Image - Orchestrates Analysis and Generation
