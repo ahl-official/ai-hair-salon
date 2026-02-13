@@ -16,23 +16,14 @@
         <!-- Header -->
         <header class="header">
             <div class="logo">
-                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="50" height="50" rx="12" fill="url(#gradient1)" />
-                    <!-- Scissors icon for salon -->
-                    <path d="M15 20 L20 25 L15 30 M35 20 L30 25 L35 30 M20 25 L30 25" stroke="white" stroke-width="2.5"
-                        stroke-linecap="round" />
-                    <circle cx="15" cy="20" r="3" fill="white" />
-                    <circle cx="15" cy="30" r="3" fill="white" />
-                    <defs>
-                        <linearGradient id="gradient1" x1="0" y1="0" x2="50" y2="50">
-                            <stop offset="0%" stop-color="#3B82F6" />
-                            <stop offset="100%" stop-color="#1E40AF" />
-                        </linearGradient>
-                    </defs>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" stroke="#2c3e50" stroke-width="3" />
+                    <path d="M10 20 C 10 10, 30 10, 30 20" stroke="#2c3e50" stroke-width="3" stroke-linecap="round" />
+                    <path d="M10 20 C 10 30, 30 30, 30 20" stroke="#3498db" stroke-width="3" stroke-linecap="round" />
                 </svg>
-                <h1>AI Hair Salon</h1>
+                <h1>Qoves Inspired</h1>
             </div>
-            <p class="subtitle">Discover your perfect hairstyle with AI</p>
+            <p class="subtitle">Professional Facial & Hair Aesthetic Protocol</p>
         </header>
 
         <!-- Main Content -->
@@ -101,6 +92,41 @@
                         <img id="previewImage" alt="Preview">
                     </div>
 
+                    <!-- Demographics Form -->
+                    <div class="demographics-form">
+                        <h3>Tell us about yourself</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="ageInput">Age</label>
+                                <input type="number" id="ageInput" min="5" max="100" placeholder="e.g., 25" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="genderInput">Gender</label>
+                                <select id="genderInput" required>
+                                    <option value="">Select...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="professionInput">Profession</label>
+                                <select id="professionInput" required>
+                                    <option value="">Select...</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Professional">Professional</option>
+                                    <option value="Creative">Creative/Artist</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Service">Service Industry</option>
+                                    <option value="Technology">Technology/IT</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Business">Business/Finance</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="transform-btn" id="transformBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -112,99 +138,137 @@
                 </div>
             </section>
 
-            <!-- Sci-Fi Analysis Section -->
+            <!-- Professional Assessment Section -->
             <section class="loading-section hidden" id="loadingSection">
-                <div class="scanner-container">
-                    <div class="scan-overlay">
-                        <div class="scan-grid"></div>
-                        <div class="scan-line"></div>
-                        <div class="hud-corner top-left"></div>
-                        <div class="hud-corner top-right"></div>
-                        <div class="hud-corner bottom-left"></div>
-                        <div class="hud-corner bottom-right"></div>
-                    </div>
-                    <div class="scanner-content">
-                        <img id="scanningImage" src="" alt="Scanning Consumer" class="scan-image">
-                    </div>
+                <h2 id="assessmentTitle">Professional Assessment</h2>
+                <div class="assessment-loader">
+                    <div class="assessment-progress" id="assessmentProgress"></div>
                 </div>
+                <p class="assessment-status" id="assessmentStatus">Initializing analysis...</p>
+                <p class="assessment-detail" id="assessmentDetail">Preparing facial anthropometric mapping...</p>
 
-                <div class="analysis-data">
-                    <div class="data-header">
-                        <span class="blink">●</span> LIVE ANALYSIS
-                    </div>
-                    <div class="data-log" id="dataLog">
-                        INITIALIZING NEURAL LINK...
-                    </div>
+                <div class="assessment-image-preview">
+                    <img id="scanningImage" src="" alt="Assessment Preview"
+                        style="width: 200px; border-radius: 8px; margin-top: 2rem; opacity: 0.5;">
                 </div>
             </section>
 
             <!-- Results Section -->
             <section class="results-section hidden" id="resultsSection">
                 <div class="results-header">
-                    <h2>Your Perfect Hairstyle!</h2>
-                    <button class="new-transform-btn" id="newTransformBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polyline points="1 4 1 10 7 10"></polyline>
-                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-                        </svg>
-                        Try Another Style
-                    </button>
-                </div>
+                    <!-- Final Protocol Report -->
+                    <div class="analysis-report" id="analysisReport">
+                        <h2 class="protocol-header"><span id="clientNameDisplay">Client</span>'s <span>Protocol</span>
+                        </h2>
 
-                <div class="comparison-container">
-                    <div class="comparison-image">
-                        <h3>Current Look</h3>
-                        <div class="image-wrapper">
-                            <img id="beforeImage" alt="Before">
+                        <div class="score-section">
+                            <div class="score-header">
+                                <span class="score-title">Aesthetic Score</span>
+                                <span class="score-value" id="aestheticScoreValue">--</span>
+                            </div>
+                            <div class="score-bar-container">
+                                <div class="score-bar-fill" id="scoreBarFill"></div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-container">
+                            <div class="comparison-image">
+                                <!-- Label like in PDF -->
+                                <div
+                                    style="font-size: 0.8rem; color: #95a5a6; font-weight: 600; text-transform: uppercase;">
+                                    Before</div>
+                                <div class="image-wrapper">
+                                    <img id="beforeImage" alt="Before">
+                                </div>
+                            </div>
+
+                            <div class="comparison-image">
+                                <div
+                                    style="font-size: 0.8rem; color: #95a5a6; font-weight: 600; text-transform: uppercase;">
+                                    After</div>
+                                <div class="image-wrapper">
+                                    <img id="afterImage" alt="After">
+                                </div>
+                            </div>
+                        </div>
+
+                        <p id="aestheticIntro"
+                            style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 3rem;"></p>
+
+                        <div class="report-grid">
+                            <div class="features-column">
+                                <h3 style="font-weight: 400; color: var(--primary-blue); margin-bottom: 1.5rem;">
+                                    Projected potential</h3>
+                                <p style="font-size: 0.9rem; margin-bottom: 2rem;">This report is organised around 11
+                                    key features for facial aesthetics.</p>
+                                <ul class="features-list">
+                                    <li class="feature-item"><span class="feature-dot"></span> Hair</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Eyebrows</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Eyes</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Nose</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Cheeks</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Jaw</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Lips</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Chin</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Skin</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Neck</li>
+                                    <li class="feature-item"><span class="feature-dot"></span> Ears</li>
+                                </ul>
+                            </div>
+                            <div class="radar-column">
+                                <div class="radar-container" id="radarContainer">
+                                    <!-- Radar Chart SVG will be injected here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recommendations-section">
+                            <h2 class="recommendation-header">Hair <span>Recommendations</span></h2>
+
+                            <div class="recommendation-block">
+                                <h3 class="block-title">Hair Style</h3>
+                                <div class="block-content" id="hairStyleContent"></div>
+                            </div>
+
+                            <div class="recommendation-block">
+                                <h3 class="block-title">Hair Loss</h3>
+                                <div class="block-content" id="hairLossContent"></div>
+
+                                <!-- Norwood Scale Indicator -->
+                                <div class="hair-loss-scale" id="norwoodScale">
+                                    <!-- Icons will be highlighted here -->
+                                </div>
+                            </div>
+
+                            <div class="recommendation-block">
+                                <h3 class="block-title">Hair Health</h3>
+                                <div class="block-content" id="hairHealthContent"></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="comparison-divider">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                    <div class="action-buttons">
+                        <button class="download-btn" id="downloadImageBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download Image
+                        </button>
+                        <button class="download-report-btn" id="downloadReportBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Download Full Report
+                        </button>
                     </div>
-
-                    <div class="comparison-image">
-                        <h3>Recommended Style</h3>
-                        <div class="image-wrapper">
-                            <img id="afterImage" alt="After">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Analysis Report -->
-                <div class="analysis-report" id="analysisReport">
-                    <h3>📋 AI Hair Stylist Analysis</h3>
-                    <div class="analysis-content" id="analysisContent">
-                        <p class="loading-analysis">Generating analysis...</p>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button class="download-btn" id="downloadImageBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Download Image
-                    </button>
-                    <button class="download-report-btn" id="downloadReportBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                        Download Full Report
-                    </button>
-                </div>
             </section>
 
             <!-- Error Section -->
