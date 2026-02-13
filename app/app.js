@@ -269,7 +269,7 @@ async function startCamera() {
 
     } catch (err) {
         console.error('Camera Error:', err);
-        showError('Unable to access camera. Please allow permissions or upload a photo instead.');
+        showError('Unable to access camera. Please allow permissions. Note: Camera requires HTTPS or localhost.');
     }
 }
 
@@ -894,6 +894,7 @@ function renderNorwoodScale(activeStage) {
 }
 
 // Updated Sci-Fi Analysis Animation to Professional Assessment
+let analysisInterval = null; // Defined explicitly
 let currentProgress = 0;
 function animateAnalysis() {
     const status = elements.assessmentStatus;
