@@ -659,7 +659,7 @@ function downloadFullReport() {
         <div class="header">
             <div class="logo">
                 <svg width="30" height="30" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" stroke="#2c3e50" stroke-width="3" fill="none"/></svg>
-                QOVES ANALYTICS
+                AMERICAN HAIRLINE
             </div>
             <div class="page-info">PAGE / 01</div>
         </div>
